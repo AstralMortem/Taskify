@@ -5,9 +5,6 @@
 		},
 		{
 			"path": "taskify-front"
-		},
-		{
-			"path": "Docker"
 		}
 	],
 	"settings": {
