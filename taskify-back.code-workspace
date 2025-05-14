@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "taskify-back"
+		},
+		{
+			"path": "taskify-front"
+		},
+		{
+			"path": "Docker"
+		}
+	],
+	"settings": {
+		"python.analysis.autoFormatStrings": true,
+		"python.analysis.autoIndent": true
+	}
+}
