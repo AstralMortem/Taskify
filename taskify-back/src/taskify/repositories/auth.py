@@ -11,6 +11,9 @@ class UserRepository(BaseRepository[User, uuid.UUID]):
 
     async def get_by_email(self, email: str) -> User | None:
         return await self.get_by_field("email", email)
+    
+    async def get_by_username(self, username: str) -> User | None:
+        return await self.get_by_field('username', username)
 
 
 class RoleRepository(BaseRepository[Role, int]):

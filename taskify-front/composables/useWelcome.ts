@@ -62,23 +62,25 @@ export const useWelcome = () => {
                     }
                 })
             })
-            navigateTo('/')
-            await boardStore.fetchBoards()
+            await reset()
+            navigateTo('/boards/' + boardID.value)
+            
         }catch(error){
             backendError(error)
         }
     }
 
-    const reset = () => {
+    const reset = async () => {
         boardTitle.value = ''
         boardLists.value = []
         boardID.value = ''
         listCards.value = []
         listID.value = ''   
+        await boardStore.fetchBoards()
 
     }
 
-    const skip = () => {
+    const skip = async () => {
         reset()
         navigateTo('/')
     }

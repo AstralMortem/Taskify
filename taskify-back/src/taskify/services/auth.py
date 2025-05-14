@@ -34,7 +34,9 @@ class AuthService:
         )
         exist = await self.repo.get_by_email(credentials.email)
         if exist is None:
-            raise error
+            exist = await self.repo.get_by_username(credentials.email)
+            if exist is None:
+                raise error
 
         is_valid_password, new_hash = self.password_helper.verify_and_update(
             credentials.password, exist.hashed_password

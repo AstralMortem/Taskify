@@ -21,12 +21,16 @@ defineEmits(['update', 'delete'])
 
 <template>
     <UICard :without-paddings="true" rounded="10"  class="cursor-pointer" @click="editMode = !editMode">
-        <div class="flex flex-row justify-between items-center">
-            <div class="flex flex-row gap-1 justify-start items-center">
-                <UIcon name="i-heroicons-pencil-square" size="1em"/>
-                <p class="font-medium text-sm">{{ $props.task.title }}</p>
+        <UTooltip :text="$props.task.description">
+            <div class="flex flex-row justify-between items-center">
+                <div class="flex flex-row gap-1 justify-start items-center">
+                    <!-- <UIcon name="i-heroicons-pencil-square" size="1em"/> -->
+                    <p class="font-medium text-sm">{{ $props.task.title }}</p>
+                </div>
+                <UIcon name="i-heroicons-ellipsis-horizontal"/>
             </div>
-        </div>
+        </UTooltip>
+        
         <TaskEdit v-model:open="editMode" :task="$props.task" :board="$props.board" @update="$emit('update', $event)" @delete="$emit('delete', $event)"/>
     </UICard>
     

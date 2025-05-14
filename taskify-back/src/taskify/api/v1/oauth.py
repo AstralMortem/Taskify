@@ -17,6 +17,8 @@ github_oauth_client = GitHubOAuth2(
 )
 
 
+
+
 def generate_state_token(payload: dict[str, Any]):
     payload["aud"] = settings.JWT_STATE_TOKEN_AUDIENCE
     payload["iat"] = datetime.now(UTC)

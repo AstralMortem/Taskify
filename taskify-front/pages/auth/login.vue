@@ -13,13 +13,20 @@ const state = ref<components["schemas"]["LoginCredentials"]>({
 const route = useRoute()
 
 const authStore = useAuthStore()
+const boardStore = useBoardStore()
+
 const login = async () => {
     await authStore.passwordLogin(state.value)
     if(authStore.isAuthenticated){
         if(route.query.next){
             navigateTo(route.query.next as string)
         }else{
-            navigateTo('/')
+            if(boardStore.boards.length >= 0){
+                navigateTo('/boards/' + boardStore.boards[0].id)
+            }else{
+                navigateTo('/')
+            }
+            
         }
         
     }
