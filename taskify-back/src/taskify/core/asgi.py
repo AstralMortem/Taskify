@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 from taskify.config import settings
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def init_router(app: FastAPI):
@@ -14,6 +15,15 @@ def set_exception(app: FastAPI):
     @app.exception_handler(TaskifyException)
     async def _(request: Request, exc: TaskifyException):
         return exc.to_response()
+
+def set_origins(app: FastAPI):
+    app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    )
 
 
 async def default_lifespan(app: FastAPI):
@@ -30,5 +40,6 @@ def create_app(lifespan=default_lifespan):
 
     init_router(app)
     set_exception(app)
+    set_origins(app)
 
     return app

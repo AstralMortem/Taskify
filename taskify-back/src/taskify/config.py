@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     TITLE: str = "Taskify Backend"
     VERSION: str = "1.0.0"
+    ORIGINS: list[str] = ['http://localhost', 'http://localhost:3000']
 
     # # ============= Routers ==========================================
 
@@ -45,6 +46,8 @@ class Settings(BaseSettings):
     AWS_SECRET_ACCESS_KEY: str = ""
     AWS_REGION_NAME: str | None = None
     AWS_ENDPOINT_URL: str | None = ""
+
+    
 
 
 settings = Settings()

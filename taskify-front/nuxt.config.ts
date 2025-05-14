@@ -16,18 +16,19 @@ export default defineNuxtConfig({
   apiParty:{
     endpoints: {
       backend: {
-        url: process.env.BASE_URL || 'http://localhost:8000',
+        url: process.env.BASE_URL,
         cookies: true,
-        schema: '/assets/openapi.json'
+        schema: './assets/openapi.json'
       }
     }
   },
-  ui:{
-    colorMode: false
+  colorMode: {
+    fallback: 'light',
+    preference: 'light'
   },
   runtimeConfig:{
     public:{
-      AWSDomain: process.env.MEDIA_URL || 'http://localhost:9000'
+      AWSDomain: process.env.MEDIA_URL
     }
   }
 })
