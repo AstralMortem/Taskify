@@ -18,12 +18,12 @@ export default defineNuxtConfig({
       backend: {
         url: process.env.BASE_URL || 'http://localhost:8000',
         cookies: true,
-        schema: '~/assets/openapi.json'
+        schema: '/assets/openapi.json'
       }
     }
   },
-  colorMode: {
-    'fallback': 'light'
+  ui:{
+    colorMode: false
   },
   runtimeConfig:{
     public:{
