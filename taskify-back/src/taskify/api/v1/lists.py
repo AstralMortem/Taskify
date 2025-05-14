@@ -1,8 +1,8 @@
 import uuid
-from fastapi import APIRouter, Body, Depends
+from fastapi import Body, Depends
 from fastapi_pagination import Page, Params
 
-from taskify.api.deps import auth_required, get_board_service, get_list_service
+from taskify.api.deps import get_board_service, get_list_service
 from taskify.models.auth import User
 from taskify.schemas.lists import ListCreate, ListRead, ListUpdate
 from taskify.schemas.rbac import Action
@@ -15,7 +15,7 @@ from taskify.utils.permissions import HasPermission
 class ListController(Controller):
     prefix = "/lists"
     tags = ["Lists"]
-    resource = 'lists'
+    resource = "lists"
 
     service: ListService = Depends(get_list_service)
     board_service: BoardService = Depends(get_board_service)
@@ -29,11 +29,10 @@ class ListController(Controller):
     ):
         return await self.service.get_board_lists(board_id, params)
 
-    @Controller.get('/board/public/{board_hash}', response_model=Page[ListRead])
-    async def get_public_lists(self, board_hash:str, params: Params = Depends()):
+    @Controller.get("/board/public/{board_hash}", response_model=Page[ListRead])
+    async def get_public_lists(self, board_hash: str, params: Params = Depends()):
         board = await self.board_service.get_public_board(board_hash)
         return await self.service.get_board_lists(board.id, params)
-
 
     @Controller.post("/board/{board_id}", response_model=ListRead)
     async def create_list_in_board(

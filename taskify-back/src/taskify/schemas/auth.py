@@ -6,12 +6,15 @@ class LoginCredentials(BaseModel):
     email: str
     password: str
 
+
 class ResetPasswordCredentials(BaseModel):
     old_password: str
     new_password: str
 
+
 class ForgotPassword(BaseModel):
     email: str
+
 
 class OAuth2AuthorizeResponse(BaseModel):
     authorization_url: str

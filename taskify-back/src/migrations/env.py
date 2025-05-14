@@ -6,7 +6,7 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from taskify.config import settings
 
-from taskify.models import auth, board, base as model_base
+from taskify.models import base as model_base
 
 from alembic import context
 

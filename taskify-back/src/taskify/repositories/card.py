@@ -1,4 +1,3 @@
-from typing import Any
 import uuid
 
 from fastapi import Depends
@@ -19,7 +18,6 @@ class CardRepository(BaseRepository[Card, uuid.UUID]):
             card.position = index
             self.session.add(card)
         await self.session.commit()
-
 
 
 async def get_card_repository(session: AsyncSession = Depends(get_session)):

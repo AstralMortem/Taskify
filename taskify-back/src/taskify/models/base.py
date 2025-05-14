@@ -1,6 +1,5 @@
-from typing import Any
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, DateTime, func, UUID
+from sqlalchemy import DateTime, func, UUID
 from datetime import datetime
 import uuid
 
@@ -10,14 +9,13 @@ class BaseModel(DeclarativeBase):
     __exclude_default_id__ = False
     repr_cols_num = 3
     repr_cols = tuple()
-    
+
     # def __init_subclass__(cls, **kw: Any) -> None:
-        
+
     #     if cls.__exclude_default_id__:
     #         if hasattr(cls, "id"):
     #             delattr(cls, "id")
     #     super().__init_subclass__(**kw)
-    
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), default=uuid.uuid4, primary_key=True

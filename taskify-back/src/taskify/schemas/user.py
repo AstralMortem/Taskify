@@ -27,4 +27,3 @@ class UserRead(ReadSchema):
     is_active: bool
 
     oauth_accounts: list[OAuthRead] = []
-

@@ -21,15 +21,13 @@ class BoardService(
         instance = await self.get(id)
 
         if instance.owner_id != kwargs.get("owner_id", ""):
-            if(not any([kwargs.get('owner_id') == m.id for m in instance.members])):
+            if not any([kwargs.get("owner_id") == m.id for m in instance.members]):
                 raise TaskifyException(
                     status.HTTP_403_FORBIDDEN,
                     "Access Denied",
                     "You can update only own boards",
                 )
-        
-        
-        
+
         dump = payload.model_dump(
             exclude_defaults=True, exclude_unset=True, exclude_none=True
         )
@@ -81,8 +79,10 @@ class BoardService(
                 "Board does not exist or already private",
             )
         return instance
-    
-    async def change_board_publicity(self, id: uuid.UUID, is_public: bool, user: User) -> Board:
+
+    async def change_board_publicity(
+        self, id: uuid.UUID, is_public: bool, user: User
+    ) -> Board:
         instance = await self.get(id)
         if instance.owner_id != user.id:
             raise TaskifyException(

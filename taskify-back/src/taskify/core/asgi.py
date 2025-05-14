@@ -7,6 +7,7 @@ def init_router(app: FastAPI):
 
     app.include_router(global_router)
 
+
 def set_exception(app: FastAPI):
     from taskify.core.exception import TaskifyException
 
@@ -14,14 +15,18 @@ def set_exception(app: FastAPI):
     async def _(request: Request, exc: TaskifyException):
         return exc.to_response()
 
+
 async def default_lifespan(app: FastAPI):
     yield
-    
 
-    
 
-def create_app(lifespan = default_lifespan):
-    app = FastAPI(debug=settings.DEBUG, title=settings.TITLE, version=settings.VERSION, lifespan=lifespan)
+def create_app(lifespan=default_lifespan):
+    app = FastAPI(
+        debug=settings.DEBUG,
+        title=settings.TITLE,
+        version=settings.VERSION,
+        lifespan=lifespan,
+    )
 
     init_router(app)
     set_exception(app)

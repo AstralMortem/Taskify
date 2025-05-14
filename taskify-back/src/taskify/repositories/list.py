@@ -1,8 +1,6 @@
 from fastapi import Depends
 from fastapi_pagination import Params
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import session
 
 from taskify.core.db import get_session
 from taskify.schemas.filters import ListFilter
@@ -26,7 +24,6 @@ class ListRepository(BaseRepository[List, uuid.UUID]):
             list_obj.position = idx
             self.session.add(list_obj)
         await self.session.commit()
-
 
 
 async def get_list_repository(session: AsyncSession = Depends(get_session)):

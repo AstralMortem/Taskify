@@ -1,5 +1,3 @@
-from operator import index
-from textwrap import indent
 from fastapi_pagination import Page, Params
 from taskify.core.exception import TaskifyException, status
 
@@ -12,7 +10,9 @@ import uuid
 
 
 class ListService(BaseService[ListRepository, List, uuid.UUID, ListCreate, ListUpdate]):
-    async def get_board_lists(self, board_id: uuid.UUID, params: Params, public_hash: str | None = None) -> Page[List]:
+    async def get_board_lists(
+        self, board_id: uuid.UUID, params: Params, public_hash: str | None = None
+    ) -> Page[List]:
         filter = ListFilter(board_id=board_id)
         return await self.repo.get_many(params, filter)
 

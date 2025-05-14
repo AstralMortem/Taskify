@@ -3,7 +3,6 @@ import uuid
 from fastapi_pagination import Page, Params
 
 from taskify.core.exception import TaskifyException, status
-from taskify.repositories.list import ListRepository
 from taskify.schemas.cards import CardCreate, CardUpdate
 from taskify.schemas.filters import CardFilter
 from .base import BaseService
@@ -51,4 +50,3 @@ class CardService(BaseService[CardRepository, Card, uuid.UUID, CardCreate, CardU
 
         await self.repo.reorder_cards(card_dict, card_order)
         return await self.get_list_cards(list_id, params)
-

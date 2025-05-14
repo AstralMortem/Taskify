@@ -1,6 +1,4 @@
 from datetime import datetime
-from re import I
-from turtle import st
 import uuid
 from .base import CreateSchema, UpdateSchema, ReadSchema
 

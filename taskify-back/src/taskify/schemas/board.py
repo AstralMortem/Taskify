@@ -9,6 +9,7 @@ class BoardMemeber(ReadSchema):
     full_name: str | None
     avatar: str | None
 
+
 class BoardCreate(CreateSchema):
     title: str
     description: str | None = None
@@ -33,5 +34,6 @@ class BoardRead(ReadSchema):
     members: list[BoardMemeber]
     owner: BoardMemeber
 
+
 class PublicBoardUpdate(UpdateSchema):
-    is_public:bool
+    is_public: bool

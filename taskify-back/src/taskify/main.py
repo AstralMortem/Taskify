@@ -9,9 +9,11 @@ app = create_app()
 def migrate():
     from alembic.command import upgrade
     from alembic.config import Config
-    cfg = Config(Path(__file__).parent.parent.joinpath('alembic.ini').absolute())
-    cfg.set_main_option('script_location', './src/migrations/')
+
+    cfg = Config(Path(__file__).parent.parent.joinpath("alembic.ini").absolute())
+    cfg.set_main_option("script_location", "./src/migrations/")
     upgrade(cfg, "heads")
+
 
 def main():
     if settings.DEBUG:
@@ -28,6 +30,7 @@ def main():
     else:
         migrate()
         uvicorn.run(app, host="0.0.0.0")
+
 
 if __name__ == "__main__":
     main()

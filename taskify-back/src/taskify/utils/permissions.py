@@ -1,5 +1,3 @@
-from types import UnionType
-from typing import Any
 from taskify.core.exception import TaskifyException, status
 from taskify.api.deps import auth_required
 from taskify.models.auth import User
@@ -78,5 +76,6 @@ class HasRole(Authorization):
 
     def __repr__(self) -> str:
         return f"HasRole({self.role})"
+
 
 __all__ = ["Authorization", "HasRole", "HasPermission"]

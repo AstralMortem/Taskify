@@ -13,13 +13,11 @@ from taskify.services.cards import CardService
 from taskify.services.lists import ListService
 from taskify.services.storage import StorageService
 from taskify.services.users import UserService
-from taskify.core.db import get_session
-
 
 
 async def get_auth_service(
     repo: UserRepository = Depends(get_user_repository),
-    oauth_repo: OAuthRepository = Depends(get_oauth_repository)
+    oauth_repo: OAuthRepository = Depends(get_oauth_repository),
 ) -> AuthService:
     return AuthService(repo, oauth_repo)
 
@@ -45,9 +43,9 @@ async def get_list_service(
 async def get_card_service(repo: CardRepository = Depends(get_card_repository)):
     return CardService(repo)
 
+
 async def get_file_storage(repo: UserRepository = Depends(get_user_repository)):
     return StorageService(repo)
-
 
 
 cookie_schema = APIKeyCookie(name=settings.AUTH_COOKIE_NAME)
@@ -58,9 +56,5 @@ async def auth_required(
     service: AuthService = Depends(get_auth_service),
 ) -> User:
     return await service.authenticate(token)
-
-from taskify.utils.permissions import HasPermission
-
-
 
 

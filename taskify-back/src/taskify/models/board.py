@@ -1,11 +1,10 @@
-from tkinter import NO
 from .base import BaseModel
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, ForeignKey, Text, Integer, DateTime
 from datetime import datetime
 from .auth import User
 import uuid
-from typing import List as PYList
+
 
 class BoardMemberRel(BaseModel):
     __tablename__ = "board_members"
@@ -28,13 +27,13 @@ class Board(BaseModel):
     public_hash: Mapped[str | None] = mapped_column(unique=True, index=True)
     is_public: Mapped[bool | None] = mapped_column(default=False)
 
-
     owner: Mapped[User] = relationship(lazy="joined")  # TODO: add back_populates
     lists: Mapped[list["List"]] = relationship(
-        back_populates="board", cascade="all, delete-orphan",
-        lazy="selectin"
+        back_populates="board", cascade="all, delete-orphan", lazy="selectin"
     )
-    members: Mapped[list[User]] = relationship(secondary=BoardMemberRel.__table__, lazy="joined")
+    members: Mapped[list[User]] = relationship(
+        secondary=BoardMemberRel.__table__, lazy="joined"
+    )
 
 
 class List(BaseModel):
@@ -45,7 +44,9 @@ class List(BaseModel):
     board_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("boards.id"))
 
     board: Mapped[Board] = relationship(back_populates="lists")
-    cards: Mapped[list["Card"]] = relationship(back_populates="list", lazy="selectin", cascade="all, delete-orphan")
+    cards: Mapped[list["Card"]] = relationship(
+        back_populates="list", lazy="selectin", cascade="all, delete-orphan"
+    )
 
 
 class CardLabelRel(BaseModel):

@@ -13,6 +13,7 @@ from taskify.utils.permissions import Authorization
 ROUTE_MARKER = "__is_controller_route__"
 CONTROLLER_MARKER = "__is_controller__"
 
+
 def override_permissions(cls: type["Controller"], func: Callable):
     params = list(inspect.signature(func).parameters.values())
     for idx, param in enumerate(params):
@@ -25,6 +26,7 @@ def override_permissions(cls: type["Controller"], func: Callable):
 
     return with_signature(inspect.Signature(params))(func)
 
+
 def get_wrapped_route(
     func,
     path: str,
@@ -34,7 +36,7 @@ def get_wrapped_route(
     status_code=200,
     response_class=JSONResponse,
     dependencies: list = [],
-    name: str | None = None
+    name: str | None = None,
 ):
     def wrapper(*args, **kwargs):
         cls: type[Controller] = kwargs.get("cls", None)
@@ -53,8 +55,6 @@ def get_wrapped_route(
 
     setattr(wrapper, ROUTE_MARKER, True)
     return wrapper
-
-
 
 
 class Controller:
@@ -140,8 +140,6 @@ class Controller:
                 router.routes.append(route)
         return router
 
-
-
     @classmethod
     def get(
         cls,
@@ -151,7 +149,7 @@ class Controller:
         status_code=200,
         response_class=JSONResponse,
         dependencies: list = [],
-        name: str | None = None
+        name: str | None = None,
     ):
         def decorator(func):
             return get_wrapped_route(
@@ -162,7 +160,7 @@ class Controller:
                 response_class=response_class,
                 status_code=status_code,
                 dependencies=dependencies,
-                name=name
+                name=name,
             )
 
         return decorator
@@ -176,7 +174,7 @@ class Controller:
         status_code=200,
         response_class=JSONResponse,
         dependencies: list = [],
-        name: str | None = None
+        name: str | None = None,
     ):
         def decorator(func):
             return get_wrapped_route(
@@ -187,7 +185,7 @@ class Controller:
                 response_class=response_class,
                 status_code=status_code,
                 dependencies=dependencies,
-                name=name
+                name=name,
             )
 
         return decorator
@@ -201,7 +199,7 @@ class Controller:
         status_code=200,
         response_class=JSONResponse,
         dependencies: list = [],
-        name: str | None = None
+        name: str | None = None,
     ):
         def decorator(func):
             return get_wrapped_route(
@@ -212,7 +210,7 @@ class Controller:
                 response_class=response_class,
                 status_code=status_code,
                 dependencies=dependencies,
-                name=name
+                name=name,
             )
 
         return decorator
@@ -226,7 +224,7 @@ class Controller:
         status_code=200,
         response_class=JSONResponse,
         dependencies: list = [],
-        name: str | None = None
+        name: str | None = None,
     ):
         def decorator(func):
             return get_wrapped_route(
@@ -237,7 +235,7 @@ class Controller:
                 response_class=response_class,
                 status_code=status_code,
                 dependencies=dependencies,
-                name=name
+                name=name,
             )
 
         return decorator
@@ -251,7 +249,7 @@ class Controller:
         status_code=200,
         response_class=JSONResponse,
         dependencies: list = [],
-        name: str | None = None
+        name: str | None = None,
     ):
         def decorator(func):
             return get_wrapped_route(
@@ -262,7 +260,7 @@ class Controller:
                 response_class=response_class,
                 status_code=status_code,
                 dependencies=dependencies,
-                name=name
+                name=name,
             )
 
         return decorator

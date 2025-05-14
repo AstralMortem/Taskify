@@ -16,7 +16,7 @@ user_router = APIRouter(prefix="/users", tags=["Users"])
 class UserController(Controller):
     prefix = "/users"
     tags = ["Users"]
-    resource = 'users'
+    resource = "users"
 
     service: UserService = Depends(get_user_service)
 
@@ -32,9 +32,16 @@ class UserController(Controller):
         return await self.service._update(user, dump)
 
     @Controller.get("/{user_id}", response_model=UserRead)
-    async def get_user(self, user_id: uuid.UUID, user: User = Depends(HasPermission(Action.READ))):
+    async def get_user(
+        self, user_id: uuid.UUID, user: User = Depends(HasPermission(Action.READ))
+    ):
         return await self.service.get(user_id)
 
-    @Controller.get('/', response_model=Page[BoardMemeber])
-    async def filter_users(self, params: Params = Depends(), user: User = Depends(HasPermission(Action.READ)), email: str | None = None, ):
+    @Controller.get("/", response_model=Page[BoardMemeber])
+    async def filter_users(
+        self,
+        params: Params = Depends(),
+        user: User = Depends(HasPermission(Action.READ)),
+        email: str | None = None,
+    ):
         return await self.service.filter_members(params, user, email)

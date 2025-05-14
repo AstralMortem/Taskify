@@ -41,11 +41,10 @@ class Settings(BaseSettings):
     # ============ STORAGE =====================================
 
     BUCKET_NAME: str = "taskifybucket"
-    AWS_ACCESS_KEY_ID: str = ''
-    AWS_SECRET_ACCESS_KEY: str = ''
+    AWS_ACCESS_KEY_ID: str = ""
+    AWS_SECRET_ACCESS_KEY: str = ""
     AWS_REGION_NAME: str | None = None
-    AWS_ENDPOINT_URL: str | None = ''
-    
+    AWS_ENDPOINT_URL: str | None = ""
 
 
 settings = Settings()
