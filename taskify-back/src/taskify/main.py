@@ -26,6 +26,7 @@ def main():
         asgi_path = ".".join(asgi_path[1:]) + ":app"
         uvicorn.run(asgi_path, reload=True)
     else:
+        migrate()
         uvicorn.run(app, host="0.0.0.0")
 
 if __name__ == "__main__":
