@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   apiParty:{
     endpoints: {
       backend: {
-        url: process.env.BASE_URL,
+        url: `${process.env.BACKEND_URL}`,
         cookies: true,
         schema: './assets/openapi.json'
       }
