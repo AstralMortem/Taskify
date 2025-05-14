@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   apiParty:{
     endpoints: {
       backend: {
-        url: `${process.env.BACKEND_URL}`,
+        url: process.env.BACKEND_URL || 'http://taskify.railway.internal',
         cookies: true,
         schema: './assets/openapi.json'
       }
