@@ -15,22 +15,23 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry (optional, if you're using it)
-RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN pip3 install poetry
 
 # Copy dependencies
-COPY pyproject.toml poetry.lock* /app/
-
-# Install Python dependencies
-RUN poetry config virtualenvs.create false \
-    && poetry install --no-interaction --no-ansi --only main
+COPY pyproject.toml poetry.lock* README.md /app/
 
 # Copy the entire app
 COPY . /app
 
+
+# Install Python dependencies
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-interaction --no-ansi
+
+
 # Expose the port Railway expects
 EXPOSE 8000
 
-RUN "poetry run migration"
 
 # Command to run the app using Uvicorn
-CMD ["poetry", "run", "server"]
+CMD ["poetry", "run", "migration", "&&", "poetry", "run", "server"]
