@@ -19,7 +19,7 @@ def set_exception(app: FastAPI):
 def set_origins(app: FastAPI):
     app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ORIGINS,
+    allow_origins=[settings.ORIGIN, 'http://localhost:3000'],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

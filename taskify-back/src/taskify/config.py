@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     TITLE: str = "Taskify Backend"
     VERSION: str = "1.0.0"
-    ORIGINS: list[str] = ['http://localhost', 'http://localhost:3000']
+    ORIGIN: str = ""
 
     # # ============= Routers ==========================================
 
