@@ -121,8 +121,8 @@ const computedLists = computed({
 
 
 <template>
-    <div class="overflow-x-auto w-max max-w-[60vw] h-full">
-        <draggable ref="el" v-model="computedLists" group="lists" item-key="id" class="flex flex-row gap-4 pb-6" ghost-class="ghost">
+    <div class="overflow-auto w-full md:max-w-[60vw] h-full">
+        <draggable ref="el" v-model="computedLists" group="lists" item-key="id" class="flex flex-col md:flex-row gap-4 pb-6" ghost-class="ghost">
             <template #item="{element}">
                 <ColumnCard :list="element" :board="$props.board" @update="updateList" @delete="deleteList"/> 
             </template>
